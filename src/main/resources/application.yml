@@ -1,0 +1,42 @@
+server:
+  port: 8088
+
+spring:
+  quartz:
+    properties:
+      org:
+        quartz:
+          dataSource:
+            qzDS:
+              URL: jdbc:postgresql://172.16.205.154:5432/thinklink
+              driver: org.postgresql.Driver
+              maxConnections: 10
+              password: thinklink
+              user: thinklink
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            dataSource: qzDS
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+            misfireThreshold: 5000
+            tablePrefix: QRTZ_
+            useProperties: false
+          scheduler:
+            instanceName: DEMO_JOBS_1.0
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            makeThreadsDaemons: true
+            threadCount: 5
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
+  datasource:
+    url: jdbc:postgresql://172.16.205.154:5432/thinklink
+    username: thinklink
+    password: thinklink
+    driver-class-name: org.postgresql.Driver
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.demo.task.entity
+
+
+
